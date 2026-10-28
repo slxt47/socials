@@ -1,0 +1,150 @@
+/* slxt.org – Startseite. Systemschrift, hell (Abenddämmerung) + dunkel (Nachthimmel) nach Gerät,
+   keine fremden Server. Kontraste geprüft (Text ≥ 4.5:1 auf der Karte, siehe Obsidian-Notiz). */
+:root {
+  --sky1: #dfe5ff; --sky2: #efe3f8; --sky3: #fde7da;
+  --card: rgba(255, 255, 255, .74);
+  --card-line: rgba(30, 20, 60, .1);
+  --text: #1d1d1f;
+  --sec: #54546a;
+  --tile: rgba(255, 255, 255, .7);
+  --tile-hover: #ffffff;
+  --accent: #5b3df5;
+  --grad: linear-gradient(100deg, #6d4aff, #3b82f6);
+  --meteor: 124, 92, 255;
+  --stars: 0;
+  --brand: invert(1);
+  --shadow: 0 30px 80px rgba(60, 40, 120, .18), 0 2px 6px rgba(60, 40, 120, .08);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --display: ui-rounded, -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Segoe UI", Roboto, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sky1: #04050d; --sky2: #0b0e2a; --sky3: #1a1240;
+    --card: rgba(20, 20, 38, .62);
+    --card-line: rgba(255, 255, 255, .1);
+    --text: #f2f2f7;
+    --sec: #aeb0c8;
+    --tile: rgba(255, 255, 255, .06);
+    --tile-hover: rgba(255, 255, 255, .12);
+    --accent: #a993ff;
+    --grad: linear-gradient(100deg, #b9a6ff, #7cb4ff);
+    --meteor: 190, 215, 255;
+    --stars: 1;
+    --brand: none;
+    --shadow: 0 30px 90px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .04);
+  }
+}
+@media (prefers-contrast: more) { :root { --sec: var(--text); --card-line: currentColor; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  min-height: 100dvh; display: flex; flex-direction: column;
+  background: linear-gradient(180deg, var(--sky1), var(--sky2) 55%, var(--sky3)) fixed;
+  color: var(--text); font: 400 1.0625rem/1.5 var(--font);
+  -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+
+/* ---------- Himmel ---------- */
+.sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#stars { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--stars); }
+.meteors { position: absolute; inset: 0; overflow: hidden; }
+.meteor {
+  position: absolute; top: 0; left: 0; height: 2px; border-radius: 2px; opacity: 0;
+  background: linear-gradient(90deg, rgba(var(--meteor), 0), rgba(var(--meteor), .4) 60%, rgba(255, 255, 255, .95));
+  transform-origin: 100% 50%; will-change: transform, opacity;
+}
+.meteor::after {
+  content: ""; position: absolute; right: -2px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 6px 2px rgba(var(--meteor), .9), 0 0 16px 5px rgba(var(--meteor), .4);
+}
+
+/* ---------- Karte: drei Ebenen (Position per JS · Schweben · Greifen) ---------- */
+.stage { position: relative; z-index: 1; flex: 1; display: grid; place-items: center; padding: max(24px, env(safe-area-inset-top)) 16px 12px; }
+.card-pos { width: min(540px, 100%); }
+.card-pos.frei { position: fixed; left: 0; top: 0; width: min(540px, calc(100vw - 32px)); will-change: transform; }
+.card-float { animation: schweben 7s ease-in-out infinite; }
+.card {
+  position: relative; padding: 10px 24px 26px; border-radius: 28px;
+  background: var(--card); border: 1px solid var(--card-line); box-shadow: var(--shadow);
+  backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
+  transition: scale .25s cubic-bezier(.2, .8, .2, 1), rotate .2s ease, box-shadow .25s ease;
+}
+.card.greifen { scale: 1.02; box-shadow: 0 40px 100px rgba(0, 0, 0, .35); }
+@media (prefers-reduced-transparency: reduce) { .card { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--sky2); } }
+
+.handle { display: flex; justify-content: center; padding: 6px 0 14px; cursor: grab; touch-action: none; }
+.handle:active { cursor: grabbing; }
+.grabber { width: 44px; height: 5px; border-radius: 3px; background: color-mix(in srgb, var(--text) 25%, transparent); }
+
+.intro { text-align: center; }
+.avatar { width: 88px; height: 88px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 18%, transparent); }
+h1 { margin: 10px 0 2px; font: 800 clamp(2.4rem, 9vw, 3.2rem)/1.05 var(--display); letter-spacing: -.03em; }
+h1 .dot { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.tagline { margin: 6px auto 0; max-width: 34ch; color: var(--sec); }
+.emote { color: var(--accent); font-weight: 600; }
+
+h2 { margin: 24px 0 10px; font: 600 .8125rem/1 var(--font); letter-spacing: .06em; text-transform: uppercase; color: var(--sec); }
+ul { list-style: none; margin: 0; padding: 0; }
+
+/* Socials: runde Knöpfe, 48 px */
+.socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.socials a {
+  position: relative; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--tile); border: 1px solid var(--card-line);
+  transition: transform .2s cubic-bezier(.3, 1.4, .5, 1), background .2s;
+}
+.socials img { filter: var(--brand); width: 22px; height: 22px; }
+.socials a:hover { background: var(--tile-hover); transform: translateY(-3px); }
+.socials a:active { transform: scale(.94); }
+/* Beschriftung beim Darüberfahren/Fokus (die Bezeichnung steht zusätzlich als aria-label) */
+.socials a::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; translate: -50% 4px;
+  padding: 4px 8px; border-radius: 8px; font-size: .75rem; font-weight: 600; white-space: nowrap;
+  background: var(--text); color: var(--sky1); opacity: 0; pointer-events: none; transition: opacity .15s, translate .15s;
+}
+.socials a:hover::after, .socials a:focus-visible::after { opacity: 1; translate: -50% 0; }
+
+/* Projekte: Kacheln mit eigenem Symbol und Namen */
+.projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.projects a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 96px;
+  padding: 12px 8px; border-radius: 18px; text-align: center;
+  background: var(--tile); border: 1px solid var(--card-line);
+  transition: transform .2s cubic-bezier(.3, 1.4, .5, 1), background .2s;
+}
+.projects a:hover { background: var(--tile-hover); transform: translateY(-3px); }
+.projects a:active { transform: scale(.97); }
+.projects .ic { width: 28px; height: 28px; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s cubic-bezier(.3, 1.6, .4, 1); }
+.projects a:hover .ic:first-child { transform: rotate(-8deg) scale(1.1); }
+.projects .name { font-weight: 600; font-size: .9375rem; line-height: 1.2; }
+.projects .sub { font-size: .8125rem; color: var(--sec); line-height: 1.2; }
+.projects .wide { grid-column: 1 / -1; }
+.projects .wide a { flex-direction: row; min-height: 60px; gap: 12px; justify-content: flex-start; padding: 12px 18px; text-align: left; }
+.projects .wide .name { margin-right: auto; }
+.projects .wide .sub { order: 3; }
+.projects .wide .go { order: 4; width: 18px; height: 18px; }
+
+.footer { position: relative; z-index: 1; text-align: center; padding: 8px 16px max(18px, env(safe-area-inset-bottom)); font-size: .8125rem; color: var(--sec); }
+.hint { position: fixed; z-index: 1; left: 50%; bottom: 44px; translate: -50% 0; margin: 0; padding: 6px 12px; border-radius: 999px;
+  font-size: .8125rem; color: var(--sec); background: var(--card); border: 1px solid var(--card-line);
+  opacity: 0; transition: opacity .6s; pointer-events: none; white-space: nowrap; }
+.hint.an { opacity: 1; }
+
+@media (max-width: 420px) {
+  .card { padding: 8px 16px 20px; border-radius: 24px; }
+  .projects { gap: 8px; }
+  .projects a { min-height: 88px; padding: 10px 4px; }
+  .projects .name { font-size: .875rem; }
+}
+@media (hover: none), (max-width: 600px) { .hint { display: none; } }
+
+@keyframes schweben { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@media (prefers-reduced-motion: reduce) {
+  .card-float { animation: none; }
+  * { transition: none !important; }
+}

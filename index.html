@@ -2,111 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>slxt.org</title>
-  <meta name="description" content="Im Just some random dude who lives at this world the same time u do :3">
-  <meta name="author" content="slxt.org">
-  <meta name="theme-color" content="#0a0a0a">
-  <meta name="color-scheme" content="dark">
-
-  <!-- Open Graph -->
+  <meta name="description" content="hi, I am just some Dude who loves to learn everything :3">
+  <meta name="author" content="slxt">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#05060f">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e4e9ff">
   <meta property="og:title" content="slxt.org">
   <meta property="og:description" content="hi, I am just some Dude who loves to learn everything :3">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://slxt.org">
-
-  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
-
-  <!-- Fonts -->
-  <link rel="stylesheet" href="./script/css/fonts.css">
-
-  <link rel="stylesheet" href="./script/css/styles.css">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="./assets/avatar-192.webp">
+  <link rel="stylesheet" href="./assets/site.css?v=2">
 </head>
 <body>
-  <!-- Atmosphere layers -->
-  <div class="vignette" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="snowflakes" id="snowflakes" aria-hidden="true"></div>
+  <!-- Eigene Symbole (ein Strich-Stil für alle Projekte) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="s-disslxt" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 8.5v2M11 7v5M13.5 8v3M16 9v1"/></symbol>
+    <symbol id="s-lcc" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="14" rx="2.5"/><path d="m6.5 8 3 2.5-3 2.5M11.5 13H15M8 21h8M12 17.5V21"/></symbol>
+    <symbol id="s-nexus" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><circle cx="12" cy="13" r="1.6"/><path d="M12 7.2v4.2M10.7 14.1 6.8 16.7M13.3 14.1l3.9 2.6"/></symbol>
+    <symbol id="s-shop" viewBox="0 0 24 24"><path d="M5 8h14l-1.1 11.2a2 2 0 0 1-2 1.8H8.1a2 2 0 0 1-2-1.8z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/><path d="M10 15h4"/></symbol>
+    <symbol id="s-cat" viewBox="0 0 24 24"><path d="M5 20v-9L4 4l4.5 3.3h7L20 4l-1 7v9z"/><path d="M9.3 12.5h.01M14.7 12.5h.01M10.5 16c1 .7 2 .7 3 0M12 14.3v1"/></symbol>
+    <symbol id="s-calc" viewBox="0 0 24 24"><rect x="4.5" y="2.5" width="15" height="19" rx="3"/><rect x="7.5" y="5.5" width="9" height="3.5" rx="1"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 17h.01M12 17h.01M15.5 17h.01"/></symbol>
+    <symbol id="s-dev" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="3"/><circle cx="9" cy="11" r="2.3"/><path d="M5.8 16.5c.7-1.6 1.9-2.4 3.2-2.4s2.5.8 3.2 2.4M14.5 10h3.5M14.5 13.5h2.5"/></symbol>
+    <symbol id="s-arrow" viewBox="0 0 24 24"><path d="M8 16 16 8M10 8h6v6"/></symbol>
+  </svg>
 
-  <main class="window" id="draggable-window">
-    <div class="window-titlebar" id="window-titlebar">
-      <div class="traffic-lights" aria-hidden="true">
-        <span class="dot dot--close"></span>
-        <span class="dot dot--minimize"></span>
-        <span class="dot dot--maximize"></span>
-      </div>
-      <span class="window-title">~/slxt.org</span>
-      <span class="window-status">online</span>
-    </div>
+  <div class="sky" aria-hidden="true">
+    <canvas id="stars"></canvas>
+    <div class="meteors" id="meteors"></div>
+  </div>
 
-    <div class="window-content">
-      <h1 class="title">slxt<span class="title-dot">.</span>org</h1>
-      <p class="tagline">hi, I am just some Dude who loves to learn everything <span class="emote">:3</span></p>
+  <main class="stage" id="stage">
+    <div class="card-pos" id="card-pos">
+      <div class="card-float">
+        <article class="card" id="card" aria-labelledby="title">
+          <div class="handle" id="handle" title="Ziehen und werfen · Doppelklick: zurück in die Mitte">
+            <span class="grabber" aria-hidden="true"></span>
+          </div>
 
-      <div class="divider" aria-hidden="true"></div>
+          <header class="intro">
+            <img class="avatar" src="./assets/avatar-192.webp" srcset="./assets/avatar-384.webp 2x" alt="slxt’s Memoji, winking" width="88" height="88">
+            <h1 id="title">slxt<span class="dot">.</span>org</h1>
+            <p class="tagline">hi, I am just some Dude who loves to learn everything <span class="emote">:3</span></p>
+          </header>
 
-      <p class="section-label">— My Socials</p>
+          <section aria-labelledby="h-socials">
+            <h2 id="h-socials">Socials</h2>
+            <ul class="socials">
+              <li><a href="discord://me/users/483353144932171776" aria-label="Discord" data-tip="Discord"><img src="./assets/discord.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://snapchat.com/t/2RIQvosE" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" data-tip="Snapchat"><img src="./assets/snapchat.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://github.com/slxt47" target="_blank" rel="noopener noreferrer" aria-label="GitHub" data-tip="GitHub"><img src="./assets/github.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://steamcommunity.com/profiles/76561199079752472/" target="_blank" rel="noopener noreferrer" aria-label="Steam" data-tip="Steam"><img src="./assets/steam.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://open.spotify.com/user/qly3lcyykf67lm7uht75ggor8" target="_blank" rel="noopener noreferrer" aria-label="Spotify" data-tip="Spotify"><img src="./assets/spotify.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://www.instagram.com/florianneub/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-tip="Instagram"><img src="./assets/instagram.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://www.tiktok.com/@slxt74" target="_blank" rel="noopener noreferrer" aria-label="TikTok" data-tip="TikTok"><img src="./assets/tiktok.svg" alt="" width="22" height="22"></a></li>
+              <li><a href="https://doc.slxt.dev" target="_blank" rel="noopener noreferrer" aria-label="Docs" data-tip="Docs"><img src="./assets/markdown.svg" alt="" width="22" height="22"></a></li>
+            </ul>
+          </section>
 
-      <div class="actions-row">
-        <nav class="social-links" aria-label="Social media links">
-        <!-- Social Media Links Start -->
-          <a href="discord://me/users/483353144932171776" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Discord" data-tooltip="Discord">
-            <img src="./assets/discord.svg" alt="" width="22" height="22" />
-          </a>
-
-          <a href="https://snapchat.com/t/2RIQvosE" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Snapchat" data-tooltip="Snapchat">
-            <img src="./assets/snapchat.svg" alt="" width="22" height="22" />
-          </a>
-
-          <a href="https://github.com/slxt47" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="GitHub" data-tooltip="GitHub">
-            <img src="./assets/github.svg" alt="" width="22" height="22" />
-          </a>
-
-          <a href="https://steamcommunity.com/profiles/76561199079752472/" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Steam" data-tooltip="Steam">
-            <img src="./assets/steam.svg" alt="" width="22" height="22" />
-          </a>
-
-          <a href="https://open.spotify.com/user/qly3lcyykf67lm7uht75ggor8?si=96f969bce1654bd0" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Spotify" data-tooltip="Spotify">
-            <img src="./assets/spotify.svg" alt="" width="22" height="22" />
-          </a>
-
-          <a href="https://www.instagram.com/florianneub/" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Instagram" data-tooltip="Instagram">
-            <img src="./assets/instagram.svg" alt="" width="22" height="22" />
-          </a>
-
-          <a href="https://www.tiktok.com/@slxt74" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="TikTok" data-tooltip="TikTok">
-            <img src="./assets/tiktok.svg" alt="" width="24" height="24" />
-          </a>
-
-          <a href="https://doc.slxt.org" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Wiki" data-tooltip="Wiki">
-            <img src="./assets/markdown.svg" alt="" width="22" height="22" />
-          </a>
-        <!-- Social Media Links End -->
-        </nav>
-
-        <a href="https://shop.slxt.org" class="primary-action" aria-label="Call me" data-tooltip="my shop :3">
-          <img src="./assets/shop.svg" alt="" width="20" height="20" />
-        </a>
+          <section aria-labelledby="h-projects">
+            <h2 id="h-projects">Things I built</h2>
+            <ul class="projects">
+              <li><a href="https://disslxt.slxt.org" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-disslxt"/></svg><span class="name">disslxt</span><span class="sub">Chat</span></a></li>
+              <li><a href="https://github.com/slxt47/LinuxCommandCenter" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-lcc"/></svg><span class="name">Command Center</span><span class="sub">GitHub</span></a></li>
+              <li><a href="https://nexus.slxt.org" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-nexus"/></svg><span class="name">Nexus</span><span class="sub">Microblog</span></a></li>
+              <li><a href="https://shop.slxt.org" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-shop"/></svg><span class="name">Webshop</span><span class="sub">my shop :3</span></a></li>
+              <li><a href="https://lbs-eibiswald.at" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-cat"/></svg><span class="name">LBS Eibiswald</span><span class="sub">cats</span></a></li>
+              <li><a href="https://calc.slxt.dev" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-calc"/></svg><span class="name">Rechner</span><span class="sub">Calculator</span></a></li>
+              <li class="wide"><a href="https://slxt.dev" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#s-dev"/></svg><span class="name">slxt.dev</span><span class="sub">my other portfolio</span><svg class="ic go" aria-hidden="true"><use href="#s-arrow"/></svg></a></li>
+            </ul>
+          </section>
+        </article>
       </div>
     </div>
-
-    <div class="highlight" aria-hidden="true"></div>
   </main>
 
   <footer class="footer">
-    <span>© <span id="year"></span> slxt.org</span>
-    <span class="footer-sep">·</span>
-    <span>built with care |  owner of cats :3</span>
+    <span>© <span id="year">2026</span> slxt.org</span><span aria-hidden="true"> · </span><span>built with care | owner of cats :3</span>
   </footer>
+  <p class="hint" id="hint">Tipp: Karte ziehen &amp; werfen · in den Himmel tippen ✨</p>
 
-  <script src="./script/js/script.js"></script>
+  <script src="./assets/site.js?v=2" defer></script>
 </body>
 </html>

@@ -1,98 +1,32 @@
 # slxt.org
 
-A minimal, retro-styled personal portfolio and social hub with a beautiful dark theme and nostalgic window UI aesthetic.
+My start page: a glass card you can **grab and throw** across a night sky with
+**shooting stars** – socials in the first row, everything I built in the second.
 
-## 🎨 Features
+- **Apple-style:** system fonts, light (dawn sky) and dark (night sky) follow the device,
+  44 px+ tap targets, visible focus, reduced motion / transparency / more contrast respected.
+- **Throwable card:** drag the card anywhere, release with momentum, it bounces off the edges
+  (same physics as [cats.slxt.org](https://cats.slxt.org)). Double-click the card to bring it back.
+  On phones (or when the card doesn't fit) it stays in place.
+- **Shooting stars:** every few seconds one crosses the sky – tap the sky to send your own.
+- **Own icons** for every project (one stroke style), brand icons for the socials.
+- **No third parties:** no Google Fonts, no CDNs, no trackers.
 
-- **Retro Window Design** – Classic macOS window chrome with draggable titlebar
-- **Dark Theme** – Carefully crafted dark mode with vignette and grain effects
-- **Responsive Layout** – Works on desktop and mobile devices
-- **Snowflake Animation** – Subtle animated snowflakes in the background
-- **Social Links Hub** – Quick access to all your social media profiles
-- **Smooth Interactions** – Draggable window, tooltips, and smooth transitions
-
-## 🛠️ Tech Stack
-
-- **HTML5** – Semantic structure
-- **CSS3** – Grid, Flexbox, CSS Variables, animations
-- **Vanilla JavaScript** – No frameworks, lightweight interactions
-- **Self-hosted fonts** – Instrument Serif & JetBrains Mono (SIL Open Font License), no requests to Google
-
-## 📦 What's Included
+## Structure
 
 ```
-slxt.org/
-├── index.html          # Main page
-├── script/
-│   ├── css/
-│   │   ├── styles.css  # All styles (theme variables, animations)
-│   │   └── fonts.css   # @font-face for the local fonts
-│   └── js/
-│       └── script.js   # Window dragging, year update, interactions
-├── assets/             # Social icons, background & favicon
-│   ├── *.svg           # Icon assets
-│   ├── fonts/          # woff2 files (latin + latin-ext)
-│   └── favicon.ico
-└── README.md          # This file
+index.html            page + SVG symbols
+assets/site.css       colors, layout, animations
+assets/site.js        stars, shooting stars, drag & throw
+assets/*.svg          social icons, favicon
+assets/avatar-*.webp  Memoji
 ```
 
-## 🚀 Quick Start
-
-### Option 1: Local Development
-
-```bash
-# Clone the repo
-git clone https://github.com/slxt47/socials.git
-cd socials
-
-# Serve locally (Python 3)
-python -m http.server 8000
-
-# Or with Node.js
-npx http-server
-
-# Open http://localhost:8000
-```
-
-### Option 2: Deploy Directly
-
-Upload all files to your web server or hosting provider (Vercel, Netlify, GitHub Pages, etc.).
-
-## ✏️ Customization
-
-### Change Your Social Links
-
-Edit the social links in `index.html`:
-
-```html
-<a href="YOUR_URL_HERE" class="social-link" data-tooltip="Your Social">
-  <img src="./assets/your-icon.svg" alt="" width="22" height="22" />
-</a>
-```
-
-### Customize Colors & Fonts
-
-Edit CSS variables at the top of `script/css/styles.css`:
-
-```css
-:root {
-  --color-bg: #0a0a0a;
-  --color-text: #e5e5e5;
-  --color-accent: #ffffff;
-  /* ... more variables */
-}
-```
-
-### Add Your Own Info
-
-Update the title and tagline in the HTML:
-
-```html
-<h1 class="title">YOUR<span class="title-dot">.</span>NAME</h1>
-<p class="tagline">Your tagline here <span class="emote">:3</span></p>
-```
+Run locally: `python3 -m http.server 8000`. After CSS/JS changes behind a cache, bump `?v=` in `index.html`.
 
 ## 🔄 Changes (October 2026)
+
+- **Rebuilt:** Apple-style card, night sky with shooting stars, throwable card, new project row (disslxt, Command Center, Nexus, Webshop, LBS Eibiswald, Rechner, slxt.dev), own icons; the shop moved from the socials into the project row.
 
 - Fonts are served from the site itself instead of Google Fonts (privacy, one less third party).
 - Removed the unused 7.4 MB `background_old.jpg`.

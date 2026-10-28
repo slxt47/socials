@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a1240"/><stop offset="1" stop-color="#04050d"/></linearGradient>
+  <linearGradient id="p" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b9a6ff"/><stop offset="1" stop-color="#7cb4ff"/></linearGradient></defs>
+  <rect width="64" height="64" rx="15" fill="url(#g)"/>
+  <path d="M10 15 26 25" stroke="#cdd8ff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="27" cy="25.6" r="2" fill="#fff"/>
+  <text x="29" y="48" text-anchor="middle" font-family="ui-rounded, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="34" font-weight="800" fill="#fff">s</text>
+  <circle cx="47" cy="44" r="5" fill="url(#p)"/>
+</svg>
