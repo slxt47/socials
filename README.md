@@ -16,7 +16,7 @@ A minimal, retro-styled personal portfolio and social hub with a beautiful dark 
 - **HTML5** – Semantic structure
 - **CSS3** – Grid, Flexbox, CSS Variables, animations
 - **Vanilla JavaScript** – No frameworks, lightweight interactions
-- **Google Fonts** – Instrument Serif & JetBrains Mono
+- **Self-hosted fonts** – Instrument Serif & JetBrains Mono (SIL Open Font License), no requests to Google
 
 ## 📦 What's Included
 
@@ -25,11 +25,13 @@ slxt.org/
 ├── index.html          # Main page
 ├── script/
 │   ├── css/
-│   │   └── styles.css  # All styles (theme variables, animations)
+│   │   ├── styles.css  # All styles (theme variables, animations)
+│   │   └── fonts.css   # @font-face for the local fonts
 │   └── js/
 │       └── script.js   # Window dragging, year update, interactions
-├── assets/             # Social icons & favicon
-│   ├── *.svg          # Icon assets
+├── assets/             # Social icons, background & favicon
+│   ├── *.svg           # Icon assets
+│   ├── fonts/          # woff2 files (latin + latin-ext)
 │   └── favicon.ico
 └── README.md          # This file
 ```
@@ -40,8 +42,8 @@ slxt.org/
 
 ```bash
 # Clone the repo
-git clone https://github.com/slxt47/slxt.org.git
-cd slxt.org
+git clone https://github.com/slxt47/socials.git
+cd socials
 
 # Serve locally (Python 3)
 python -m http.server 8000
@@ -89,6 +91,13 @@ Update the title and tagline in the HTML:
 <h1 class="title">YOUR<span class="title-dot">.</span>NAME</h1>
 <p class="tagline">Your tagline here <span class="emote">:3</span></p>
 ```
+
+## 🔄 Changes (October 2026)
+
+- Fonts are served from the site itself instead of Google Fonts (privacy, one less third party).
+- Removed the unused 7.4 MB `background_old.jpg`.
+- Footer text matches the live site again.
+- Fixed the clone URL in this README.
 
 ## 📝 Meta Tags
 
