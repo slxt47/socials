@@ -3,8 +3,8 @@
 My start page: a glass card you can **grab and throw** across a night sky with
 **shooting stars** – socials in the first row, everything I built in the second.
 
-- **Apple-style:** system fonts, light (dawn sky) and dark (night sky) follow the device,
-  44 px+ tap targets, visible focus, reduced motion / transparency / more contrast respected.
+- **Apple-style:** system fonts, light (dawn sky) and dark (night sky), dark by default with a
+  switch – the whole page **fades slowly (1.2 s)** into the other mode, 44 px+ tap targets, visible focus, reduced motion / transparency / more contrast respected.
 - **Throwable card:** drag the card anywhere, release with momentum, it bounces off the edges
   (same physics as [cats.slxt.org](https://cats.slxt.org)). Double-click the card to bring it back.
   On phones (or when the card doesn't fit) it stays in place.
@@ -15,14 +15,22 @@ My start page: a glass card you can **grab and throw** across a night sky with
 ## Structure
 
 ```
-index.html            page + SVG symbols
-assets/site.css       colors, layout, animations
-assets/site.js        stars, shooting stars, drag & throw
-assets/*.svg          social icons, favicon
-assets/avatar-*.webp  Memoji
+index.html               page + SVG symbols
+assets/style.css         colors, layout, animations
+assets/site.js           stars, shooting stars, drag & throw
+assets/extras.js         twinkling stars, aurora, pointer parallax, staggered card entrance, tile light + ripple
+assets/modus.js          light/dark switch (shared by all slxt pages): slow crossfade via View Transitions
+assets/profil-*.webp     profile picture in layers: night sky, dawn sky, the Memoji on top
+assets/*.svg             social icons, favicon
 ```
 
 Run locally: `python3 -m http.server 8000`. After CSS/JS changes behind a cache, bump `?v=` in `index.html`.
+
+## 🔄 Changes (November 2026)
+
+- **Light/dark switch** (dark by default): the page fades slowly into the other mode; endless animations pause meanwhile so nothing stutters.
+- **Profile picture in layers:** the Memoji stays, only its background changes between night sky and dawn sky.
+- **More motion:** twinkling stars, a soft aurora that follows the pointer, the card's content appears one after another, light and ripple on the tiles. Everything is `transform`/`opacity` only and off with “reduce motion”.
 
 ## 🔄 Changes (October 2026)
 

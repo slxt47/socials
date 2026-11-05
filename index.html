@@ -6,17 +6,18 @@
   <title>slxt.org</title>
   <meta name="description" content="hi, I am just some Dude who loves to learn everything :3">
   <meta name="author" content="slxt">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#05060f">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e4e9ff">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b0e2a">
   <meta property="og:title" content="slxt.org">
   <meta property="og:description" content="hi, I am just some Dude who loves to learn everything :3">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://slxt.org">
-  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="./assets/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="./assets/avatar-192.webp">
-  <link rel="stylesheet" href="./assets/site.css?v=2">
+  <link rel="icon" href="./assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="./assets/favicon.ico?v=2" sizes="any">
+  <link rel="apple-touch-icon" href="./assets/logo-180.png">
+  <!-- Hell/Dunkel wie alle slxt-Seiten: Standard dunkel, Wahl in localStorage „modus“ -->
+  <script src="./assets/modus.js?v=3"></script>
+  <link rel="stylesheet" href="./assets/style.css?v=7">
 </head>
 <body>
   <!-- Eigene Symbole (ein Strich-Stil für alle Projekte) -->
@@ -36,6 +37,8 @@
     <div class="meteors" id="meteors"></div>
   </div>
 
+  <button type="button" class="modus-knopf" data-modus-schalter></button>
+
   <main class="stage" id="stage">
     <div class="card-pos" id="card-pos">
       <div class="card-float">
@@ -45,7 +48,7 @@
           </div>
 
           <header class="intro">
-            <img class="avatar" src="./assets/avatar-192.webp" srcset="./assets/avatar-384.webp 2x" alt="slxt’s Memoji, winking" width="88" height="88">
+            <span class="avatar-box"><img class="avatar ebene nacht" src="./assets/profil-bg-dunkel-192.webp" srcset="./assets/profil-bg-dunkel-384.webp 2x" alt="" width="88" height="88"><img class="avatar ebene daemmerung" src="./assets/profil-bg-hell-192.webp" srcset="./assets/profil-bg-hell-384.webp 2x" alt="" width="88" height="88"><img class="avatar ebene gesicht" src="./assets/profil-gesicht-192.webp" srcset="./assets/profil-gesicht-384.webp 2x" alt="slxt’s Memoji, winking" width="88" height="88"></span>
             <h1 id="title">slxt<span class="dot">.</span>org</h1>
             <p class="tagline">hi, I am just some Dude who loves to learn everything <span class="emote">:3</span></p>
           </header>
@@ -84,8 +87,9 @@
   <footer class="footer">
     <span>© <span id="year">2026</span> slxt.org</span><span aria-hidden="true"> · </span><span>built with care | owner of cats :3</span>
   </footer>
-  <p class="hint" id="hint">Tipp: Karte ziehen &amp; werfen · in den Himmel tippen ✨</p>
+  <p class="hint" id="hint">Tipp: Karte ziehen &amp; werfen · Doppelklick holt sie zurück · in den Himmel tippen ✨</p>
 
-  <script src="./assets/site.js?v=2" defer></script>
+  <script src="./assets/site.js?v=4" defer></script>
+  <script src="./assets/extras.js?v=4" defer></script>
 </body>
 </html>

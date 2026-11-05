@@ -1,9 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a1240"/><stop offset="1" stop-color="#04050d"/></linearGradient>
-  <linearGradient id="p" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b9a6ff"/><stop offset="1" stop-color="#7cb4ff"/></linearGradient></defs>
+  <!-- slxt.org-Logo: Link-Sammlung – drei Link-Pillen, die erste hervorgehoben (slxt-Familie: Nachtquadrat, Komet, Farbpunkt) -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f2a6e"/><stop offset=".55" stop-color="#0b0e2a"/><stop offset="1" stop-color="#04050d"/></linearGradient>
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9a6ff"/><stop offset="1" stop-color="#7cb4ff"/></linearGradient>
+    <linearGradient id="k" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cdd8ff" stop-opacity="0"/><stop offset="1" stop-color="#e6ecff" stop-opacity=".85"/></linearGradient>
+    <linearGradient id="h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e8e6f8"/></linearGradient>
+  </defs>
   <rect width="64" height="64" rx="15" fill="url(#g)"/>
-  <path d="M10 15 26 25" stroke="#cdd8ff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="27" cy="25.6" r="2" fill="#fff"/>
-  <text x="29" y="48" text-anchor="middle" font-family="ui-rounded, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="34" font-weight="800" fill="#fff">s</text>
-  <circle cx="47" cy="44" r="5" fill="url(#p)"/>
+  <circle cx="54" cy="12" r=".8" fill="#fff" fill-opacity=".55"/><circle cx="9" cy="55" r=".9" fill="#fff" fill-opacity=".5"/><circle cx="44" cy="7" r=".6" fill="#fff" fill-opacity=".4"/>
+  <path d="M6 7 22.5 14.2" stroke="url(#k)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="23.3" cy="14.6" r="2" fill="#fff"/>
+  <ellipse cx="32" cy="50.5" rx="13" ry="1.6" fill="#000" fill-opacity=".3"/>
+  <rect x="17" y="21" width="30" height="7.5" rx="3.75" fill="url(#p)"/>
+  <circle cx="21.6" cy="24.75" r="2" fill="#fff"/>
+  <rect x="17" y="31" width="30" height="7.5" rx="3.75" fill="url(#h)"/>
+  <circle cx="21.6" cy="34.75" r="2" fill="#7c6cff" fill-opacity=".55"/>
+  <rect x="17" y="41" width="30" height="7.5" rx="3.75" fill="url(#h)" fill-opacity=".85"/>
+  <circle cx="21.6" cy="44.75" r="2" fill="#7c6cff" fill-opacity=".55"/>
+  <path d="M26 24.75h14" stroke="#fff" stroke-opacity=".9" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M26 34.75h12M26 44.75h10" stroke="#5b3df5" stroke-opacity=".35" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="53" cy="53" r="4.2" fill="url(#p)"/>
 </svg>

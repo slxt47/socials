@@ -52,7 +52,8 @@
     }, first ? 1500 + Math.random() * 2500 : 3500 + Math.random() * 9000);
   })(true);
   // In den Himmel tippen = eigene Sternschnuppe
-  addEventListener('pointerdown', (e) => {
+  // click statt pointerdown: Wischen zum Scrollen am Handy löst keine Sternschnuppe aus
+  addEventListener('click', (e) => {
     if (e.target.closest('.card, a, button, .footer')) return;
     meteor(e.clientX, e.clientY);
   });
@@ -66,16 +67,32 @@
   const passt = () => pos.offsetHeight + 16 < innerHeight && innerWidth > 600;
   const setzen = () => { pos.style.transform = `translate3d(${x}px, ${y}px, 0)`; };
 
+  let heim = null;   // laufende Rückkehr-Animation
   function freigeben() {
     if (frei) return;
-    const r = pos.getBoundingClientRect();
+    const r = pos.getBoundingClientRect();                  // auch mitten in der Rückkehr: dort greifen, wo sie gerade ist
+    if (heim) { heim.cancel(); heim = null; }
     stage.style.minHeight = stage.offsetHeight + 'px';     // Platz halten, nichts springt
     pos.classList.add('frei'); frei = true;
     x = r.left; y = r.top; setzen();
   }
+  // Zurück an den Platz in der Mitte – weich gleitend (FLIP: von der aktuellen Stelle zum Platz animieren)
   function zurueck() {
-    frei = false; vx = vy = 0; pos.classList.remove('frei'); pos.style.transform = ''; stage.style.minHeight = '';
-    if (!reduce) card.animate([{ scale: .96, opacity: .6 }, { scale: 1, opacity: 1 }], { duration: 350, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    drag = null; vx = vy = 0;
+    const vorher = pos.getBoundingClientRect();
+    frei = false; pos.classList.remove('frei'); pos.style.transform = ''; stage.style.minHeight = '';
+    card.classList.remove('greifen'); card.style.rotate = '0deg';
+    if (reduce) return;
+    const nachher = pos.getBoundingClientRect();
+    const dx = vorher.left - nachher.left, dy = vorher.top - nachher.top, weg = Math.hypot(dx, dy);
+    if (weg < 1) return;
+    const kipp = Math.max(-6, Math.min(6, -dx / 60));       // leicht in Flugrichtung geneigt, richtet sich beim Ankommen auf
+    heim = pos.animate([
+      { transform: `translate(${dx}px, ${dy}px) rotate(${kipp}deg)` },
+      { transform: 'translate(0, 0) rotate(0deg)' },
+    ], { duration: Math.min(950, 480 + weg * 0.45), easing: 'cubic-bezier(.22, 1.18, .36, 1)' });   // kurzes Nachfedern
+    heim.onfinish = () => { heim = null; };
   }
 
   let letzterGriff = 0;
