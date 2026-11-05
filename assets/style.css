@@ -222,12 +222,9 @@ a, button { touch-action: manipulation; }
 @keyframes aurora1 { to { transform: translate3d(12vw, 8vh, 0) scale(calc(var(--s) * 1.15)); } }
 @keyframes aurora2 { to { transform: translate3d(-14vw, 10vh, 0) scale(calc(var(--s) * .9)); } }
 @keyframes aurora3 { to { transform: translate3d(8vw, -10vh, 0) scale(calc(var(--s) * 1.2)); } }
-/* Während der Kreisblende alles andere anhalten (kein Ruckeln) */
-.modus-wechsel *, .modus-wechsel *::before, .modus-wechsel *::after { transition: none !important; animation-play-state: paused !important; }
+/* Überblenden (modus.js hält per .modus-wechsel alle Animationen an): Schalter-Symbol darf weiterdrehen, teure Unschärfe ersetzen */
 .modus-wechsel .modus-knopf svg { animation-play-state: running !important; }
 /* Unschärfe der Glaskarte ist der teuerste Teil der Kreisblende: für die 0,7 s durch die gleiche Farbe ohne Blur ersetzen */
 .modus-wechsel .card { backdrop-filter: none; -webkit-backdrop-filter: none; background: linear-gradient(var(--card), var(--card)), var(--sky2); }
 .modus-wechsel .modus-knopf { backdrop-filter: none; -webkit-backdrop-filter: none; }
-/* Moduswechsel = langsames Überblenden der ganzen Seite (Standard-Mischung hält gleiche Pixel – das Gesicht – ruhig) */
-::view-transition-group(root) { animation-duration: 1.2s; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: 1.2s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
+/* Moduswechsel = langsames Überblenden der ganzen Seite, Dauer steht in modus.js (gleiche Pixel – das Gesicht – bleiben ruhig) */
